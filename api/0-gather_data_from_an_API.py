@@ -5,8 +5,6 @@ Python script that returns TODO list progress for a given employee ID
 import requests
 from sys import argv
 
-
-
 def get_employee_info(employee_id):
     """
     Get employee information by employee ID
@@ -15,7 +13,6 @@ def get_employee_info(employee_id):
     response = requests.get(url)
     return response.json()
 
-
 def get_employee_todos(employee_id):
     """
     Get the TODO list of the employee by employee ID
@@ -23,7 +20,6 @@ def get_employee_todos(employee_id):
     url = f'https://jsonplaceholder.typicode.com/users/{employee_id}/todos'
     response = requests.get(url)
     return response.json()
-
 
 def main(employee_id):
     """
@@ -45,9 +41,8 @@ def main(employee_id):
         if completed:
             print(f"\t {title}")
 
-
 if __name__ == "__main__":
     if len(argv) > 1:
         main(argv[1])
     else:
-        print("Usage: ./0-gather_data_from_an_API.py <employee_id>")
+        print("Usage: ./0-gather_data_from_an_API.py <employee_id")
