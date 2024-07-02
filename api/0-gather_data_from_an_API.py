@@ -5,11 +5,6 @@ Python script that returns TODO list progress for a given employee ID
 import requests
 from sys import argv
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 06b2b817633e70bf753da09c8db1ed4d28f41a5d
 def get_employee_info(employee_id):
     """
     Get employee information by employee ID
@@ -18,10 +13,6 @@ def get_employee_info(employee_id):
     response = requests.get(url)
     return response.json()
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 06b2b817633e70bf753da09c8db1ed4d28f41a5d
 def get_employee_todos(employee_id):
     """
     Get the TODO list of the employee by employee ID
@@ -30,10 +21,6 @@ def get_employee_todos(employee_id):
     response = requests.get(url)
     return response.json()
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 06b2b817633e70bf753da09c8db1ed4d28f41a5d
 def main(employee_id):
     """
     Main function to fetch and display the TODO list progress of the employee
@@ -54,16 +41,8 @@ def main(employee_id):
         if completed:
             print(f"\t {title}")
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 06b2b817633e70bf753da09c8db1ed4d28f41a5d
 if __name__ == "__main__":
     if len(argv) > 1:
         main(argv[1])
     else:
-<<<<<<< HEAD
-        print("Usage: ./0-gather_data_from_an_API.py <employee_id")
-=======
         print("Usage: ./0-gather_data_from_an_API.py <employee_id>")
->>>>>>> 06b2b817633e70bf753da09c8db1ed4d28f41a5d
