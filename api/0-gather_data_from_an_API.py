@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 """
-Module to fetch user information and export TODO list to a CSV file
+Python script that returns TODO list progress for a given employee ID
 """
-import csv
 import requests
 from sys import argv
 
@@ -11,7 +10,7 @@ def get_employee_info(employee_id):
     """
     Get employee information by employee ID
     """
-    url = f'https://jsonplaceholder.typicode.com/users/{employee_id}'
+    url = f'https://jsonplaceholder.typicode.com/users/{employee_id}/'
     response = requests.get(url)
     return response.json()
 
@@ -25,32 +24,29 @@ def get_employee_todos(employee_id):
     return response.json()
 
 
-def export_to_csv(employee_id, username, todos):
-    """
-    Export TODO list to a CSV file
-    """
-    filename = f'{employee_id}.csv'
-    with open(filename, mode='w') as file:
-        file_writer = csv.writer(file, delimiter=',', quoting=csv.QUOTE_ALL)
-        for todo in todos:
-            rowData = [employee_id, username, todo['completed'], todo['title']]
-            file_writer.writerow(rowData)
-
-
 def main(employee_id):
     """
-    Main function to fetch user info and TODO list, then export to CSV
+    Main function to fetch and display the TODO list progress of the employee
     """
-    user = get_employee_info(employee_id)
-    username = user.get("username")
+    employee = get_employee_info(employee_id)
+    employee_name = employee.get("name")
 
-    todos = get_employee_todos(employee_id)
+    emp_todos = get_employee_todos(employee_id)
+    tasks = {todo.get("title"): todo.get("completed") for todo in emp_todos}
 
-    export_to_csv(employee_id, username, todos)
+    total_tasks = len(tasks)
+    completed_tasks = [completed for completed in tasks.values() if completed]
+    completed_tasks_count = len(completed_tasks)
+
+    print(f"Employee {employee_name} is done with tasks"
+          f"({completed_tasks_count}/{total_tasks}):")
+    for title, completed in tasks.items():
+        if completed:
+            print(f"\t {title}")
 
 
 if __name__ == "__main__":
     if len(argv) > 1:
         main(argv[1])
     else:
-        print("Usage: ./1-export_to_CSV.py <employee_id>")
+        print("Usage: ./0-gather_data_from_an_API.py <employee_id>")
